@@ -1,0 +1,6 @@
+---
+# defaults file for backup-local-win
+
+backup_local_win_retention_number: 10
+backup_local_win_days_of_week: monday,tuesday,wednesday,thursday,friday
+backup_local_win_time: 04:00:00

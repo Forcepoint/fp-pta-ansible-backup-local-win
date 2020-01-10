@@ -1,0 +1,27 @@
+---
+# tasks file for backup-local-win
+
+- name: ensure backup folder exists
+  win_file:
+    path: "{{ backup_local_win_destination }}"
+    state: directory
+
+- name: copy backup script
+  win_copy:
+    src: files/backup.py
+    dest: "{{ backup_local_win_destination }}/backup_{{ backup_local_win_name }}.py"
+
+# https://docs.ansible.com/ansible/latest/modules/win_scheduled_task_module.html#win-scheduled-task-module
+- name: configure backup job
+  win_scheduled_task:
+    name: "{{ backup_local_win_name }}"
+    actions:
+    - path: cmd.exe
+      arguments: "/c python \"{{ backup_local_win_destination }}\\backup_{{ backup_local_win_name }}.py\" \"{{ backup_local_win_name }}\" \"{{ backup_local_win_target }}\" \"{{ backup_local_win_destination }}\" \"{{ backup_local_win_retention_number }}\" >> \"{{ backup_local_win_destination }}\\job_{{ backup_local_win_name }}.log\" 2>&1"
+    triggers:
+    - type: weekly
+      days_of_week: "{{ backup_local_win_days_of_week }}"
+      start_boundary: "2018-08-29T{{ backup_local_win_time }}"
+    username: SYSTEM
+    state: present
+    enabled: yes
