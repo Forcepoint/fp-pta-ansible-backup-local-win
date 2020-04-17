@@ -56,7 +56,7 @@ This performs a backup a registry key, Monday, Wednesday, and Friday at 6 AM, re
 
 ## License
 
-BSD
+BSD-3-Clause
 
 ## Author Information
 
