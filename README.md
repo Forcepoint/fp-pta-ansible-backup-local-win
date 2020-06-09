@@ -5,6 +5,8 @@ frequency via a scheduled task. This role doesn't transfer the zips off the host
 by another process. The simplest transfer would be to utilize a secondary drive as the target backup folder so the files 
 are moved automatically when the zip is created.
 
+For information about PTA and how to use it with this Ansible role please visit https://github.com/Forcepoint/fp-pta-overview/blob/master/README.md
+
 ## Requirements
 
 Python37 must be installed.
